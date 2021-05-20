@@ -13,7 +13,7 @@ import injector from "utils/injector";
 describe("Home reducer", () => {
   const { dispatch, getState } = store;
 
-  injector.registerBackendProvider(createBackendProvider());
+  injector.registerBackendProvider(createBackendProvider({ responseDelay: 0 }));
 
   it("loadHomeThunk test", async () => {
     await dispatch(loadPageThunk());

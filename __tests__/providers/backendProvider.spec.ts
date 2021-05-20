@@ -5,7 +5,7 @@ import { Relative } from "models/Relative";
 import createBackendProvider from "providers/backendProvider/createBackendProvider";
 
 describe("backendProvider test", () => {
-  const provider = createBackendProvider();
+  const provider = createBackendProvider({ responseDelay: 0 });
 
   it("Test get patients, check data consistance", async () => {
     const patients = await provider.getPatients();

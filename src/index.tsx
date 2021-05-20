@@ -9,7 +9,7 @@ import injector from "utils/injector";
 
 import "./assets/base.scss";
 
-injector.registerBackendProvider(createBackendProvider());
+injector.registerBackendProvider(createBackendProvider({ responseDelay: 200 }));
 
 ReactDOM.render(
   <React.StrictMode>

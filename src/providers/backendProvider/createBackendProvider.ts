@@ -12,24 +12,28 @@ import { normalizePatient } from "./normalize/normalizePatient";
 
 import rawPatients from "./patients.json";
 
-const SERVICE_RESPONSE_DELAY = 200;
+type CreateBackendProviderParams = {
+  responseDelay: number;
+};
 
-export default function createBackendProvider(): BackendProvider {
+export default function createBackendProvider({
+  responseDelay,
+}: CreateBackendProviderParams): BackendProvider {
   let patients: Patient[] = rawPatients.map(normalizePatient);
 
   return {
     getPatients: async () => {
-      await sleep(SERVICE_RESPONSE_DELAY);
+      await sleep(responseDelay);
 
       return patients;
     },
     removePatient: async (id: number) => {
-      await sleep(SERVICE_RESPONSE_DELAY);
+      await sleep(responseDelay);
 
       patients = patients.filter((patient: Patient) => patient.id !== id);
     },
     removeRelative: async ({ id, patientId }: RemoveRelativeParams) => {
-      await sleep(SERVICE_RESPONSE_DELAY);
+      await sleep(responseDelay);
 
       patients = patients.map((patient: Patient) => {
         if (patient.id !== patientId) {
@@ -42,7 +46,7 @@ export default function createBackendProvider(): BackendProvider {
       });
     },
     removeRelativePhone: async ({ id, patientId, relativeId }: RemoveRelativePhoneParams) => {
-      await sleep(SERVICE_RESPONSE_DELAY);
+      await sleep(responseDelay);
 
       patients = patients.map((patient: Patient) => {
         if (patient.id !== patientId) {
