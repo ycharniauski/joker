@@ -43,10 +43,10 @@ or we can apply a wrapper pattern to make a cache:
 I had implmeneted Thunks and tests first, before I had started to work with UI. Also we have a fake data provider. 
 It means that we can test solution with fake data first, and then create some Http Provider and make end to end test to test it on real environment.
 
-### No logic inside UI
+### Redux. No logic on UI
 
-Put all logic to thunks and utils. In the same time I had tried to avoid to dispatch actions directly from UI.
-If we use thunks only then we can write a test in declarative way. And test will emulate UI job. For example:
+Put all logic to thunks and utils. In the same time I had tried to avoid dispatch actions directly from UI.
+I even don't export Redux actions. If we use thunks only we can write a tests in declarative way. For instance:
 
 ```javascript
   test('', () => {
@@ -60,3 +60,5 @@ If we use thunks only then we can write a test in declarative way. And test will
     expect(getState().home.patients.find(patient => patient.id === id)).toBeFalsy();
   })
 ```
+
+Test is emulating UI job and user actions.
