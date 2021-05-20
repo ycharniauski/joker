@@ -1,0 +1,13 @@
+@import '../../assets/variables.scss';
+
+.btn-delete {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+
+  img {
+    width: 12px;
+    height: 12px;  
+  }
+}

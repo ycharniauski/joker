@@ -1,0 +1,24 @@
+@import '../../../assets/variables.scss';
+
+.relatives-table {
+  font-size: 14px;
+  font-family: 'Courier';
+
+  > thead {
+    background-color: $table-th-bg;
+
+    th {
+      text-align: left;
+    }
+  }
+
+  &__th {
+    &-id {
+      width: 20px;
+    }
+
+    &-expand {
+      width: 20px;
+    }
+  }
+}

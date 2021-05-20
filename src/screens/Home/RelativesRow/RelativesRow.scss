@@ -1,0 +1,11 @@
+.relatives-row {
+  width: 100%;
+
+  &__sub > td {
+    width: 100%;
+    text-align: right;
+    > table {
+      margin-left: auto;
+    }
+  }
+}

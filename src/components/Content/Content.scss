@@ -1,0 +1,17 @@
+@import '../../assets/variables.scss';
+
+.app-content {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  padding: 32px;
+  background: #fff;
+  color: $font-color;
+
+  &__page {
+    display: flex;
+    width: 100%;
+    max-width: $content-max-width;
+    flex: 1;
+  }
+}

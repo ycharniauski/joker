@@ -1,0 +1,19 @@
+@import '../../../assets/variables.scss';
+
+.phones-table {
+  font-size: 14px;
+  font-family: 'Courier';
+
+  > thead {
+    background-color: $table-th-bg;
+    th {
+      text-align: left;
+    }
+  }
+
+  &__th {
+    &-id {
+      width: 20px;
+    }
+  }
+}
