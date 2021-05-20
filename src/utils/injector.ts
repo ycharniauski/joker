@@ -6,7 +6,7 @@ export default {
   getBackendProvider: (): BackendProvider => {
     return backendProvider;
   },
-  registerBackendProvider: (instance: BackendProvider) => {
+  registerBackendProvider: (instance: BackendProvider): void => {
     backendProvider = instance;
   },
 };

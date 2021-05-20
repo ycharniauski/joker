@@ -38,7 +38,7 @@ export const selectPatients = (state: RootState): Patient[] => state.home.patien
 
 // ----------------------- Thunks ---------------------------
 
-export const loadPageThunk = (): AppThunk => async (dispatch, getState) => {
+export const loadPageThunk = (): AppThunk => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const provider = injector.getBackendProvider();
@@ -55,7 +55,7 @@ export const loadPageThunk = (): AppThunk => async (dispatch, getState) => {
 
 export const removePatientThunk =
   (id: number): AppThunk =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const provider = injector.getBackendProvider();
@@ -78,7 +78,7 @@ type RemoveRelativeThunkParams = {
 
 export const removeRelativeThunk =
   ({ id, patientId }: RemoveRelativeThunkParams): AppThunk =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const provider = injector.getBackendProvider();
@@ -102,7 +102,7 @@ type RemoveRelativePhoneThunkParams = {
 
 export const removeRelativePhoneThunk =
   ({ id, patientId, relativeId }: RemoveRelativePhoneThunkParams): AppThunk =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const provider = injector.getBackendProvider();

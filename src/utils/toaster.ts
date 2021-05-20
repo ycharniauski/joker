@@ -1,3 +1,3 @@
-export function toasterError(error: string) {
+export function toasterError(error: string): void {
   alert(error);
 }
