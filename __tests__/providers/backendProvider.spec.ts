@@ -7,13 +7,22 @@ import createBackendProvider from "providers/backendProvider/createBackendProvid
 describe("backendProvider test", () => {
   const provider = createBackendProvider();
 
-  it("Test get patients", async () => {
+  it("Test get patients, check data consistance", async () => {
     const patients = await provider.getPatients();
     expect(patients.length > 0).toBeTruthy();
 
     patients.forEach((patient: Patient) => {
       expect(patient.id).toBeTruthy();
       expect(Array.isArray(patient.relatives)).toBeTruthy();
+
+      patient.relatives.forEach((relative: Relative) => {
+        expect(relative.id).toBeTruthy();
+        expect(Array.isArray(relative.phones)).toBeTruthy();
+
+        relative.phones.forEach((phone: Phone) => {
+          expect(phone.id).toBeTruthy();
+        });
+      });
     });
   });
 
@@ -27,25 +36,35 @@ describe("backendProvider test", () => {
   it("Test remove patient relative", async () => {
     let patients = await provider.getPatients();
 
-    let patient = patients.find((pat: Patient) => pat.relatives.length > 0);
-    if (!patient) throw new Error("There are no patients with relatives");
+    let patientId = 0;
+    let relativeId = 0;
+    let relativesCount = 0;
 
-    const relativesCount = patient.relatives.length;
-    const patientId = patient.id;
-    const [relative] = patient.relatives;
+    patients.forEach((pat: Patient) => {
+      pat.relatives.forEach((rel: Relative) => {
+        if (!relativeId) {
+          patientId = pat.id;
+          relativeId = rel.id;
+          relativesCount = pat.relatives.length;
+        }
+      });
+    });
 
-    if (!relative) throw new Error("There are no relatives");
-    const { id } = relative;
-
-    await provider.removeRelative({ id, patientId });
+    await provider.removeRelative({ id: relativeId, patientId });
     patients = await provider.getPatients();
 
-    patient = patients.find((pat: Patient) => pat.id === patientId);
-    if (!patient) throw new Error("Patient not found");
+    let exists = false;
+    let currRelativesCount = 0;
 
-    expect(patient.relatives.length).toBe(relativesCount - 1);
+    patients.forEach((pat: Patient) => {
+      if (pat.id === patientId) {
+        exists = pat.relatives.some((rel: Relative) => rel.id === relativeId);
+        currRelativesCount = pat.relatives.length;
+      }
+    });
 
-    expect(patient.relatives.some((rel: Relative) => rel.id === id)).toBeFalsy();
+    expect(exists).toBeFalsy();
+    expect(currRelativesCount).toBe(relativesCount - 1);
   });
 
   it("Test remove patient relative phone", async () => {
