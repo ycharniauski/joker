@@ -24,7 +24,9 @@ export default function Relatives({ patient }: Props) {
       </thead>
       <tbody>
         {relatives.length === 0 ? (
-          <td colSpan={5}>No relatives</td>
+          <tr>
+            <td colSpan={5}>No relatives</td>
+          </tr>
         ) : (
           relatives.map((relative: Relative) => (
             <RelativesRow key={relative.id} patient={patient} relative={relative} />
