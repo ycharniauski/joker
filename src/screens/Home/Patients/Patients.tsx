@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { Patient } from "models/Patient";
 
 import PatientsRow from "../PatientsRow";
@@ -7,7 +7,7 @@ type Props = {
   patients: Patient[];
 };
 
-export default function Patients({ patients }: Props) {
+function Patients({ patients }: Props) {
   return (
     <table className="patients">
       <thead>
@@ -34,3 +34,5 @@ export default function Patients({ patients }: Props) {
     </table>
   );
 }
+
+export default memo<Props>(Patients);

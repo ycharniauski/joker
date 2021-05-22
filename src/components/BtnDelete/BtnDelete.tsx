@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import icon from "./images/delete.svg";
 
 export type Props = {
-  onClick: () => void;
+  onClick: () => void | Promise<void>;
 };
 
 export default function BtnDelete(props: Props) {
